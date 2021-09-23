@@ -64,6 +64,14 @@
                 $(this).toggleClass("selectedDay");
             }
         });
+
+        $('#clickableLocation').on('click', function () {
+            alert("alerta");
+        });
+        
+        $('#plusOneIconButton').on('click', function () {
+            alert("alerta");
+        });
     });
 
 })(jQuery);

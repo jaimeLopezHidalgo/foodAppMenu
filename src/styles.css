@@ -75,12 +75,13 @@ table td{
 #mobileIconsContainer {
     height: 40%;
     text-align: right;
-    /* border: 1px solid cyan; */
+    padding-right: 15px;
 }
 
 #locationContainer {
     height: 60%;
     padding-left: 28px;
+    padding-right: 17px;
 }
 
 #appBody {
@@ -146,6 +147,15 @@ table td{
     width: 0%;
     padding-left: 6px;
     padding-right: 6px;
+}
+
+#selectLocationText{
+    margin-left: 12px;
+    color: var(--grayS)
+}
+
+#clickableLocation{
+    cursor: pointer;
 }
 
 /* CLASSES */
@@ -320,4 +330,12 @@ table td{
 .selectedDay{
     background-color: var(--yellowDarkP);
     color: white;
+}
+
+.fa-map-marker-alt{
+    color: var(--redS);
+}
+
+.fa-stream{
+    float: right;
 }

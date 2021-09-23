@@ -25,10 +25,16 @@
             <div id="display" class="fillWidth fillHeight topLimit bottomLimit">
                 <div id="appHeader" class="topLimit">
                     <div id="mobileIconsContainer" class="topLimit">
-                        wifi
+                        <i class="fas fa-wifi"></i>
+                        <i class="fas fa-battery-three-quarters"></i>
+                        <span>9:41</span>
                     </div>
                     <div id="locationContainer">
-                        location
+                        <span id="clickableLocation">
+                            <i class="fas fa-map-marker-alt fa-lg"></i>
+                            <span id="selectLocationText">Select location…</span>
+                        </span>
+                        <i class="fas fa-stream"></i>
                     </div>
                 </div>
                 <div id="appBody">
@@ -88,7 +94,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="myButton menuButton clipChildren">
+                                        <div id="plusOneIconButton" class="myButton menuButton clipChildren">
                                             <span class="menuIconContainer"><strong id="plusOneIcon">+1</strong></span>
                                             <div class="menuButtonDescription">Platillos
                                             </div>
