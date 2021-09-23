@@ -2,9 +2,15 @@
     //GLOBAL VARIABLES
     const cardElement = "<div class=\"card\"><div class=\"imageCard\"><div class=\"quantityContainer\"><div><strong class=\"mealTag\"><\/strong><\/div><\/div><div class=\"gradientShadow\"><div class=\"mealArea\"><\/div><div class=\"mealName\"><\/div><\/div><\/div><div class=\"cardFooter\"><span class=\"iconContainer\"><i class=\"far fa-clock fa-lg\"><\/i><\/span><span><strong class=\"mealPrice\"><\/strong><\/span><\/div>" + "<\/div>";
 
+    const modalButtonElement = "<div class=\"myButton modalButton\"><\/div>";
+
     const mealsURL = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Beef";
 
     const mealsLookupPrefix = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
+
+    const categoriesURL = "https://www.themealdb.com/api/json/v1/1/categories.php";
+
+    var mealIDs = [];
 
 
     //FUNCTIONS
@@ -15,7 +21,6 @@
         var mealImageURL;
         var mealName;
         var mealPrice;
-        var mealIDs = [];
 
         menuContainer.empty();
         $.getJSON(mealsURL, function (mealsData) {
@@ -35,10 +40,6 @@
         }).then(function () {
             var mealArea;
             var mealTag;
-            var asyncCard;
-
-            //dar credito al autor de flaticon 
-            menuContainer.append($("<div>Icons made by <a href=\"https://www.flaticon.com/authors/kiranshastry\" title=\"Kiranshastry\">Kiranshastry<\/a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a><\/div>"));
 
             menuContainer.find('.card').each(function (i) {
                 $.getJSON(mealsLookupPrefix + mealIDs[i], function (mealDetails) {
@@ -51,6 +52,18 @@
                 })
             })
         });
+    }
+
+    function filterMenu(category){
+        imageCards = $("#menuContainer").find(".imageCard");
+        var mealTag;
+
+        imageCards.each(function (){
+            mealTag = $(this).find(".mealTag").text();
+            if (mealTag!=category) {
+                $(this).closest(".card").remove();
+            }
+        })
     }
 
     //MAIN CODE
@@ -79,26 +92,44 @@
                 $(".modalButtonSelected").toggleClass("modalButtonSelected");
                 $(this).toggleClass("modalButtonSelected");
                 text = $(this).text();
-                console.log($(this).prop('id'));
                 if ($(this).closest(".modal").attr('id') == "hourModal") {
                     $('#timeChip').find(".menuButtonDescription").text(text);
                 } else {
                     $('#servicesChip').find(".menuButtonDescription").text(text);
+                    filterMenu(text);
                 }
             }
+            $('#modalBlur').hide();
         });
 
         $('.menuButton').on('click', function () {
             var id = $(this).attr('id');
+            var category;
+            var button;
+            var modalBody;
+
             if (id != "plusOneIconButton") {
                 if (id == "timeChip") {
                     $('#modalBlur').toggle("hidden");
                     $('#servicesModal').hide();
                     $('#hourModal').show();
                 } else {
-                    $('#modalBlur').toggle("hidden");
-                    $('#hourModal').hide();
-                    $('#servicesModal').show();
+                    modalBody = $('#servicesModal').find(".modalBody");
+                    $.getJSON(categoriesURL, function (categoriesData) {
+                        $.each(categoriesData.categories, function (ind, data) {
+                            category = data.strCategory;
+                            button = $(modalButtonElement);
+                            if (category == "Beef") {
+                                button.addClass("modalButtonSelected");
+                            }
+                            button.text(category);
+                            modalBody.append(button);
+                        });
+                    }).then(function (){
+                        $('#modalBlur').toggle("hidden");
+                        $('#hourModal').hide();
+                        $('#servicesModal').show();
+                    })
                 }
             }
         });
