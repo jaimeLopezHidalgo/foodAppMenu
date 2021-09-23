@@ -54,16 +54,25 @@
         });
     }
 
-    function filterMenu(category){
+    function filterMenu(category) {
         imageCards = $("#menuContainer").find(".imageCard");
         var mealTag;
+        var count = imageCards.length;
 
-        imageCards.each(function (){
+        imageCards.each(function () {
             mealTag = $(this).find(".mealTag").text();
-            if (mealTag!=category) {
+            if (mealTag != category) {
                 $(this).closest(".card").remove();
+                count -= 1;
             }
         })
+
+        if (count == 0) {
+            $('#filterMessage').css("visibility", "visible");
+        } else {
+            $('#filterMessage').css("visibility", "hidden");
+        }
+
     }
 
     //MAIN CODE
@@ -125,7 +134,7 @@
                             button.text(category);
                             modalBody.append(button);
                         });
-                    }).then(function (){
+                    }).then(function () {
                         $('#modalBlur').toggle("hidden");
                         $('#hourModal').hide();
                         $('#servicesModal').show();
