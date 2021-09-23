@@ -1,0 +1,229 @@
+/* VARIABLES */
+
+:root {
+    /* qualitative */
+    /* primary */
+    --yellowDarkP: #FCAB3F;
+    --yellowLightP: #FDC963;
+    --darkGrayP: #4D4D4D;
+    /* secondary */
+    --tealS: #A1D2CE;
+    --redS: #F49897;
+    --grayS: #c9c8c8;
+    --lightGrayS: #FEF2F1;
+    /* other */
+    --cardBoxShadow: 0px 5px 7px -3px rgba(0, 0, 0, 0.582);
+    /* quantitative */
+    --displayBorderRadius: 25px;
+    --cardBorderRadius: 10px;
+}
+
+/* ELEMENT SELECTORS */
+
+/* the box model fit */
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    /* font-family: 'Gotham', sans-serif; */
+    /* font-family: 'Gotham Black', sans-serif; */
+    font-family: 'Gotham 300', sans-serif;
+    /* font-family: 'Gotham Thin', sans-serif; */
+    /* font-family: 'Gotham XLight', sans-serif; */
+    /* font-family: 'Gotham Book', sans-serif; */
+
+    font-size: 13px;
+}
+
+/* IDs */
+
+#phone {
+    background-color: black;
+    height: 720px;
+    border-radius: 40px;
+    aspect-ratio: 720/1280;
+    padding: 40px 12px 40px 12px;
+    box-shadow: 20px 20px 50px -10px rgba(0, 0, 0, .5);
+}
+
+#display {
+    background-color: white;
+    border-radius: var(--displayBorderRadius);
+}
+
+#appHeader {
+    height: 8%;
+    border-bottom: 2px solid var(--grayS);
+}
+
+#mobileIconsContainer {
+    height: 40%;
+    text-align: right;
+    /* border: 1px solid cyan; */
+}
+
+#locationContainer {
+    height: 60%;
+    /* border: 1px solid cyan; */
+}
+
+#appBody {
+    height: 84%;
+}
+
+#datesContainer {
+    height: 7%;
+    text-align: center;
+}
+
+#mainContentContainer {
+    height: 93%;
+    background-color: #f3f3f3;
+}
+
+#menuButtonsContainer {
+    /* border: 2px solid blue; */
+    height: 12%;
+    text-align: center;
+}
+
+#menuContainer {
+    /* border: 2px solid blue; */
+    height: 88%;
+    text-align: center;
+    overflow-y: auto;
+}
+
+#menuContainer::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+#menuContainer div, span{
+    white-space: nowrap;
+    text-overflow: clip;
+    overflow: hidden;
+}
+
+#appFooter {
+    height: 8%;
+    background-color: var(--grayS);
+}
+
+/* CLASSES */
+
+.centerChildrenHorizontally {
+    display: flex;
+    justify-content: center;
+}
+
+.fillWidth {
+    width: 100%;
+}
+
+.fillHeight {
+    height: 100%;
+}
+
+.topLimit {
+    border-top-left-radius: var(--displayBorderRadius);
+    border-top-right-radius: var(--displayBorderRadius);
+}
+
+.bottomLimit {
+    border-bottom-left-radius: var(--displayBorderRadius);
+    border-bottom-right-radius: var(--displayBorderRadius);
+}
+
+.card {
+    width: 40%;
+    display: inline-block;
+    text-align: left;
+    height: 180px;
+    border-radius: var(--cardBorderRadius);
+    box-shadow: var(--cardBoxShadow);
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 2.5px;
+    margin-right: 2.5px;
+}
+
+.imageCard {
+    max-width: 100%;
+    height: 82%;
+    border-radius: var(--cardBorderRadius);
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    background-size: 100%;
+    /* display: flex; */
+    box-shadow: var(--cardBoxShadow);
+}
+
+.quantityContainer {
+    background-color: white;
+    padding-left: 2px;
+    padding-right: 2px;
+    border-radius: 5px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 5px;
+    max-width: 90%;
+}
+
+.mealTag{
+    color: var(--yellowLightP);
+}
+
+.gradientShadow {
+    background-color: var(--redS);
+    padding: 5px;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    border-radius: 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.09) 0%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+.mealArea {
+    color: white;
+}
+
+.mealName {
+    color: var(--yellowLightP);
+}
+
+.cardFooter {
+    height: 18%;
+    padding: 7px;
+}
+
+.clockIconContainer {
+    width: 10%;
+}
+
+.fa-clock {
+    color: var(--yellowLightP);
+}
+
+/* .managedTextLength{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+} */
+
+.mealPrice {
+    float: right;
+    text-align: right;
+    width: 80%;
+    font-size: 13px;
+    text-overflow: ellipsis;
+}
