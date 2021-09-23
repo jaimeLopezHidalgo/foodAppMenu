@@ -33,19 +33,81 @@
                 </div>
                 <div id="appBody">
                     <div id="datesContainer">
-                        dates
+                        <table id="datesTable">
+                            <tr>
+                                <td>Dom</td>
+                                <td>Lun</td>
+                                <td>Mar</td>
+                                <td>Mié</td>
+                                <td>Jue</td>
+                                <td>Vie</td>
+                                <td>Sáb</td>
+                            </tr>
+                            <tr id="bottomRow">
+                                <td>
+                                    <div class="circle">28</div>
+                                </td>
+                                <td>
+                                    <div class="circle">29</div>
+                                </td>
+                                <td>
+                                    <div class="circle">30</div>
+                                </td>
+                                <td>
+                                    <div class="circle">01</div>
+                                </td>
+                                <td>
+                                    <div class="circle selectedDay">02</div>
+                                </td>
+                                <td>
+                                    <div class="circle">03</div>
+                                </td>
+                                <td>
+                                    <div class="circle">04</div>
+                                </td>
+
+                            </tr>
+                        </table>
                     </div>
                     <div id="mainContentContainer">
                         <div id="menuButtonsContainer">
-                            buttons
+                            <table id="menuButtonsTable">
+                                <tr>
+                                    <td>
+                                        <div class="myButton menuButton clipChildren">
+                                            <span class="menuIconContainer"><i class="far fa-clock fa-lg"></i></span>
+                                            <div class="menuButtonDescription">2:00 - 3:00 pm
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="myButton menuButton clipChildren">
+                                            <span class="menuIconContainer"><i class="fas fa-utensils"></i></span>
+                                            <div class="menuButtonDescription">Cocina industrial
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="myButton menuButton clipChildren">
+                                            <span class="menuIconContainer"><strong id="plusOneIcon">+1</strong></span>
+                                            <div class="menuButtonDescription">Platillos
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
-                        <div id="menuContainer">
-                            
-                        </div>
+                        <div id="menuContainer" class="clipChildren"></div>
                     </div>
                 </div>
                 <div id="appFooter" class="fillWidth bottomLimit">
-
+                    <table>
+                        <tr>
+                            <td><img src="../icons/shopping-cart.svg" alt="" class="footerIcon"></td>
+                            <td><img src="../icons/menu.svg" alt="" id="menuIcon" class="footerIcon"></td>
+                            <td><img src="../icons/user.svg" alt="" class="footerIcon"></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

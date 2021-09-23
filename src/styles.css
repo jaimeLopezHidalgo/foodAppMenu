@@ -41,6 +41,16 @@ body {
     font-size: 13px;
 }
 
+table{
+    width: 100%;
+    height: 100%;
+}
+
+table td{
+    text-align: center;
+    max-height: 100%;
+}
+
 /* IDs */
 
 #phone {
@@ -59,7 +69,7 @@ body {
 
 #appHeader {
     height: 8%;
-    border-bottom: 2px solid var(--grayS);
+    border-bottom: 2px solid #ececec;
 }
 
 #mobileIconsContainer {
@@ -70,7 +80,7 @@ body {
 
 #locationContainer {
     height: 60%;
-    /* border: 1px solid cyan; */
+    padding-left: 28px;
 }
 
 #appBody {
@@ -78,13 +88,16 @@ body {
 }
 
 #datesContainer {
-    height: 7%;
+    height: 10%;
     text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 #mainContentContainer {
-    height: 93%;
+    height: 90%;
     background-color: #f3f3f3;
+    overflow-y: auto;
 }
 
 #menuButtonsContainer {
@@ -97,7 +110,7 @@ body {
     /* border: 2px solid blue; */
     height: 88%;
     text-align: center;
-    overflow-y: auto;
+    /* overflow-y: auto; */
 }
 
 #menuContainer::-webkit-scrollbar {
@@ -105,15 +118,34 @@ body {
     background: transparent;  /* Optional: just make scrollbar invisible */
 }
 
-#menuContainer div, span{
-    white-space: nowrap;
-    text-overflow: clip;
-    overflow: hidden;
-}
-
 #appFooter {
     height: 8%;
     background-color: var(--grayS);
+    padding-left: 22px;
+    padding-right: 22px;
+}
+
+#menuIcon{
+    height: 25px;
+}
+
+#menuButtonsTable td{
+    max-width: 10px;
+}
+
+#plusOneIcon{
+    color: var(--yellowLightP);
+    font-size: 13px;
+}
+
+#datesTable{
+    font-size: 9px;
+}
+
+#datesTable #bottomRow td{
+    width: 0%;
+    padding-left: 6px;
+    padding-right: 6px;
 }
 
 /* CLASSES */
@@ -150,8 +182,9 @@ body {
     box-shadow: var(--cardBoxShadow);
     margin-top: 4px;
     margin-bottom: 4px;
-    margin-left: 2.5px;
-    margin-right: 2.5px;
+    margin-left: 3px;
+    margin-right: 3px;
+    cursor: pointer;
 }
 
 .imageCard {
@@ -206,8 +239,9 @@ body {
     padding: 7px;
 }
 
-.clockIconContainer {
+.iconContainer {
     width: 10%;
+    /* float: left; */
 }
 
 .fa-clock {
@@ -226,4 +260,64 @@ body {
     width: 80%;
     font-size: 13px;
     text-overflow: ellipsis;
+}
+
+.footerIcon{
+    height: 20px;
+    cursor: pointer;
+}
+
+.myButton{
+    border: 1px solid #e4e4e4;
+    background-color: white;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.myButton:active{
+    box-shadow: inset 0px 2px 2px 2px rgba(0, 0, 0, 0.247);
+}
+
+.menuButton{
+    width: 100%;
+    border-radius: 20px;
+    height: 55%;
+    font-size: 10px;
+    margin-bottom: 15%;
+}
+
+.menuButtonDescription{
+    width: 85%;
+    float: right;
+    font-weight: bolder;
+    margin-top: 1px;
+    font-size: 10px;
+}
+
+.fa-utensils{
+    color: var(--yellowLightP);
+    height: 30px;
+}
+
+.clipChildren div, span{
+    white-space: nowrap;
+    text-overflow: clip;
+    overflow: hidden;
+}
+
+.menuIconContainer{
+    float: left;
+    height: 100%;
+}
+
+.circle{
+    height: 30px;
+    border-radius: 50px;
+    padding-top: 9px;
+    cursor: pointer;
+}
+
+.selectedDay{
+    background-color: var(--yellowDarkP);
+    color: white;
 }

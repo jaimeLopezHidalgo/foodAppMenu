@@ -1,6 +1,6 @@
 (function ($) {
     //GLOBAL VARIABLES
-    const cardElement = "<div class=\"card\"><div class=\"imageCard\"><div class=\"quantityContainer\"><div><strong class=\"mealTag\"><\/strong><\/div><\/div><div class=\"gradientShadow\"><div class=\"mealArea\"><\/div><div class=\"mealName\"><\/div><\/div><\/div><div class=\"cardFooter\"><span class=\"clockIconContainer\"><i class=\"far fa-clock fa-lg\"><\/i><\/span><span><strong class=\"mealPrice\"><\/strong><\/span><\/div>" + "<\/div>";
+    const cardElement = "<div class=\"card\"><div class=\"imageCard\"><div class=\"quantityContainer\"><div><strong class=\"mealTag\"><\/strong><\/div><\/div><div class=\"gradientShadow\"><div class=\"mealArea\"><\/div><div class=\"mealName\"><\/div><\/div><\/div><div class=\"cardFooter\"><span class=\"iconContainer\"><i class=\"far fa-clock fa-lg\"><\/i><\/span><span><strong class=\"mealPrice\"><\/strong><\/span><\/div>" + "<\/div>";
 
     const mealsURL = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Beef";
 
@@ -36,6 +36,10 @@
             var mealArea;
             var mealTag;
             var asyncCard;
+
+            //dar credito al autor de flaticon 
+            menuContainer.append($("<div>Icons made by <a href=\"https://www.flaticon.com/authors/kiranshastry\" title=\"Kiranshastry\">Kiranshastry<\/a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a><\/div>"));
+
             menuContainer.find('.card').each(function (i) {
                 $.getJSON(mealsLookupPrefix+mealIDs[i], function (mealDetails) {
                     mealArea = mealDetails.meals[0].strArea;
@@ -47,13 +51,19 @@
                 })
             })
         });
-    }
-
-    //JQUERY
+    }    
 
     //MAIN CODE
     $(document).ready(function () {
         loadMenu();
+
+        //JQUERY
+        $('.circle').on('click', function () {
+            if(!$(this).hasClass("selectedDay")){
+                $(".selectedDay").toggleClass("selectedDay");
+                $(this).toggleClass("selectedDay");
+            }
+        });
     });
 
 })(jQuery);
