@@ -41,17 +41,17 @@
             menuContainer.append($("<div>Icons made by <a href=\"https://www.flaticon.com/authors/kiranshastry\" title=\"Kiranshastry\">Kiranshastry<\/a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a><\/div>"));
 
             menuContainer.find('.card').each(function (i) {
-                $.getJSON(mealsLookupPrefix+mealIDs[i], function (mealDetails) {
+                $.getJSON(mealsLookupPrefix + mealIDs[i], function (mealDetails) {
                     mealArea = mealDetails.meals[0].strArea;
                     mealTag = mealDetails.meals[0].strTags;
-                    mealTag = mealTag==null? "": mealTag.split(',')[0];
-                    cardAsync = menuContainer.find('#'+mealIDs[i]);
+                    mealTag = mealTag == null ? "" : mealTag.split(',')[0];
+                    cardAsync = menuContainer.find('#' + mealIDs[i]);
                     cardAsync.find('.mealArea').text(mealArea);
                     cardAsync.find('.mealTag').text(mealTag);
                 })
             })
         });
-    }    
+    }
 
     //MAIN CODE
     $(document).ready(function () {
@@ -59,7 +59,7 @@
 
         //JQUERY
         $('.circle').on('click', function () {
-            if(!$(this).hasClass("selectedDay")){
+            if (!$(this).hasClass("selectedDay")) {
                 $(".selectedDay").toggleClass("selectedDay");
                 $(this).toggleClass("selectedDay");
             }
@@ -68,9 +68,39 @@
         $('#clickableLocation').on('click', function () {
             alert("alerta");
         });
-        
+
         $('#plusOneIconButton').on('click', function () {
             alert("alerta");
+        });
+
+        $('.modal').on('click', '.modalButton', function () {
+            var text;
+            if (!$(this).hasClass("modalButtonSelected")) {
+                $(".modalButtonSelected").toggleClass("modalButtonSelected");
+                $(this).toggleClass("modalButtonSelected");
+                text = $(this).text();
+                console.log($(this).prop('id'));
+                if ($(this).closest(".modal").attr('id') == "hourModal") {
+                    $('#timeChip').find(".menuButtonDescription").text(text);
+                } else {
+                    $('#servicesChip').find(".menuButtonDescription").text(text);
+                }
+            }
+        });
+
+        $('.menuButton').on('click', function () {
+            var id = $(this).attr('id');
+            if (id != "plusOneIconButton") {
+                if (id == "timeChip") {
+                    $('#modalBlur').toggle("hidden");
+                    $('#servicesModal').hide();
+                    $('#hourModal').show();
+                } else {
+                    $('#modalBlur').toggle("hidden");
+                    $('#hourModal').hide();
+                    $('#servicesModal').show();
+                }
+            }
         });
     });
 

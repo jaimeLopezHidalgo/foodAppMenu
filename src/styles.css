@@ -37,16 +37,15 @@ body {
     /* font-family: 'Gotham Thin', sans-serif; */
     /* font-family: 'Gotham XLight', sans-serif; */
     /* font-family: 'Gotham Book', sans-serif; */
-
     font-size: 13px;
 }
 
-table{
+table {
     width: 100%;
     height: 100%;
 }
 
-table td{
+table td {
     text-align: center;
     max-height: 100%;
 }
@@ -101,6 +100,13 @@ table td{
     overflow-y: auto;
 }
 
+#mainContentContainer::-webkit-scrollbar {
+    width: 0px;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
+}
+
 #menuButtonsContainer {
     /* border: 2px solid blue; */
     height: 12%;
@@ -114,11 +120,6 @@ table td{
     /* overflow-y: auto; */
 }
 
-#menuContainer::-webkit-scrollbar {
-    width: 0px;  /* Remove scrollbar space */
-    background: transparent;  /* Optional: just make scrollbar invisible */
-}
-
 #appFooter {
     height: 8%;
     background-color: var(--grayS);
@@ -126,36 +127,51 @@ table td{
     padding-right: 22px;
 }
 
-#menuIcon{
+#menuIcon {
     height: 25px;
 }
 
-#menuButtonsTable td{
+#menuButtonsTable td {
     max-width: 10px;
 }
 
-#plusOneIcon{
+#plusOneIcon {
     color: var(--yellowLightP);
     font-size: 13px;
 }
 
-#datesTable{
+#datesTable {
     font-size: 9px;
 }
 
-#datesTable #bottomRow td{
+#datesTable #bottomRow td {
     width: 0%;
     padding-left: 6px;
     padding-right: 6px;
 }
 
-#selectLocationText{
+#selectLocationText {
     margin-left: 12px;
     color: var(--grayS)
 }
 
-#clickableLocation{
+#clickableLocation {
     cursor: pointer;
+}
+
+#modalBlur {
+    position: relative;
+    top: -442px;
+    width: 360px;
+    height: 442px;
+    background-color: rgba(212, 212, 212, 0.74);
+    text-align: center;
+}
+
+#hourModal {
+    width: 88%;
+    background-color: white;
+    margin-top: 0px;
 }
 
 /* CLASSES */
@@ -220,7 +236,7 @@ table td{
     max-width: 90%;
 }
 
-.mealTag{
+.mealTag {
     color: var(--yellowLightP);
 }
 
@@ -272,23 +288,24 @@ table td{
     text-overflow: ellipsis;
 }
 
-.footerIcon{
+.footerIcon {
     height: 20px;
     cursor: pointer;
 }
 
-.myButton{
+.myButton {
     border: 1px solid #e4e4e4;
     background-color: white;
     cursor: pointer;
     padding: 5px;
+    border-radius: 7px;
 }
 
-.myButton:active{
+.myButton:active {
     box-shadow: inset 0px 2px 2px 2px rgba(0, 0, 0, 0.247);
 }
 
-.menuButton{
+.menuButton {
     width: 100%;
     border-radius: 20px;
     height: 55%;
@@ -296,46 +313,77 @@ table td{
     margin-bottom: 15%;
 }
 
-.menuButtonDescription{
+.menuButtonDescription {
     width: 85%;
     float: right;
     font-weight: bolder;
-    margin-top: 1px;
-    font-size: 10px;
+    margin-top: 2px;
+    font-size: 9px;
 }
 
-.fa-utensils{
+.fa-utensils {
     color: var(--yellowLightP);
     height: 30px;
 }
 
-.clipChildren div, span{
+.clipChildren div, span {
     white-space: nowrap;
     text-overflow: clip;
     overflow: hidden;
 }
 
-.menuIconContainer{
+.menuIconContainer {
     float: left;
     height: 100%;
 }
 
-.circle{
+.circle {
     height: 30px;
     border-radius: 50px;
     padding-top: 9px;
     cursor: pointer;
 }
 
-.selectedDay{
+.selectedDay {
     background-color: var(--yellowDarkP);
     color: white;
 }
 
-.fa-map-marker-alt{
+.fa-map-marker-alt {
     color: var(--redS);
 }
 
-.fa-stream{
+.fa-stream {
     float: right;
+}
+
+.modal {
+    width: 88%;
+    background-color: white;
+    margin-top: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    height: 170px;
+}
+
+.modalHeader {
+    height: 33px;
+    padding-top: 7px;
+}
+
+.modalHeaderDescription {
+    position: absolute;
+    padding-left: 10px;
+    top: 12px;
+}
+
+.modalButton {
+    margin-right: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.modalButtonSelected {
+    box-shadow: var(--cardBoxShadow);
 }
