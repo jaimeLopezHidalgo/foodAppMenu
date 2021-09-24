@@ -38,6 +38,7 @@ body {
     /* font-family: 'Gotham XLight', sans-serif; */
     /* font-family: 'Gotham Book', sans-serif; */
     font-size: 13px;
+    text-align: center;
 }
 
 table {
@@ -51,6 +52,11 @@ table td {
 }
 
 /* IDs */
+
+#phoneContainer{
+    /* background-color: lightgreen; */
+    display: inline-block;
+}
 
 #phone {
     background-color: black;
@@ -81,6 +87,7 @@ table td {
     height: 60%;
     padding-left: 28px;
     padding-right: 17px;
+    text-align: left;
 }
 
 #appBody {
@@ -102,15 +109,12 @@ table td {
 
 #mainContentContainer::-webkit-scrollbar {
     width: 0px;
-    /* Remove scrollbar space */
-    background: transparent;
-    /* Optional: just make scrollbar invisible */
+    background: var(--yellowDarkP);
 }
 
-#menuButtonsContainer {
+#chipsContainer {
     /* border: 2px solid blue; */
     height: 12%;
-    text-align: center;
 }
 
 #menuContainer {
@@ -130,13 +134,9 @@ table td {
     height: 25px;
 }
 
-#menuButtonsTable td {
-    max-width: 10px;
-}
-
 #plusOneIcon {
     color: var(--yellowLightP);
-    font-size: 13px;
+    font-size: 17px;
 }
 
 #datesTable {
@@ -145,8 +145,8 @@ table td {
 
 #datesTable #bottomRow td {
     width: 0%;
-    padding-left: 6px;
-    padding-right: 6px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 #selectLocationText {
@@ -161,7 +161,7 @@ table td {
 #modalBlur {
     position: relative;
     top: -442px;
-    width: 360px;
+    width: 100%;
     height: 442px;
     background-color: rgba(212, 212, 212, 0.74);
     text-align: center;
@@ -175,13 +175,59 @@ table td {
 
 #servicesModal {
     overflow-y: auto;
+    height: 330px;
 }
 
 #filterMessage{
     position: relative;
-    left: 95px;
-    top: -270px;
+    top: 380px;
     visibility: hidden;
+}
+
+#alertCard{
+    left: 10px;
+    top: -625px;
+    position: relative;
+    background-color: var(--redS);
+    font-family: 'Gotham Book';
+    text-align: center;
+    height: 30px;
+    padding-top: 8px;
+    width: 95%;
+    border-radius: var(--cardBorderRadius);
+    box-shadow: var(--cardBoxShadow);
+}
+
+#hourChip{
+    width: 120px;
+    margin-left: none;
+}
+
+#servicesChip{
+    min-width: 60px;
+}
+
+#servicesChip .chipDescription{
+    margin-left: 20px;
+}
+
+#plusOneChip{
+    width: 80px;
+    margin-right: none;
+}
+
+#footerTable td:hover{
+    cursor: pointer;
+}
+
+#servicesModal::-webkit-scrollbar {
+    width: 7px;
+}
+  
+  
+#servicesModal::-webkit-scrollbar-thumb {
+    background: linear-gradient(200deg, var(--yellowLightP) 40%, var(--yellowDarkP));
+    border-radius: -10px;
 }
 
 /* CLASSES */
@@ -244,6 +290,7 @@ table td {
     margin-top: 5px;
     margin-right: 5px;
     max-width: 90%;
+    font-size: 16px;
 }
 
 .mealTag {
@@ -300,7 +347,6 @@ table td {
 
 .footerIcon {
     height: 20px;
-    cursor: pointer;
 }
 
 .myButton {
@@ -315,17 +361,17 @@ table td {
     box-shadow: inset 0px 2px 2px 2px rgba(0, 0, 0, 0.247);
 }
 
-.menuButton {
-    width: 100%;
+.chip {
     border-radius: 20px;
-    height: 55%;
+    height: 57%;
     font-size: 10px;
-    margin-bottom: 15%;
+    position: relative; 
+    float: right;
+    margin: 5px;
+    text-align: center;
 }
 
-.menuButtonDescription {
-    width: 85%;
-    float: right;
+.chipDescription {
     font-weight: bolder;
     margin-top: 2px;
     font-size: 9px;
@@ -350,7 +396,7 @@ table td {
 .circle {
     height: 30px;
     border-radius: 50px;
-    padding-top: 9px;
+    padding-top: 10px;
     cursor: pointer;
 }
 
@@ -396,4 +442,20 @@ table td {
 
 .modalButtonSelected {
     box-shadow: var(--cardBoxShadow);
+}
+
+.chipDescription{
+    font-size: 11px;
+    margin: 4px;
+
+}
+
+.fa-times{
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.fa-stream{
+    cursor: pointer;
 }
