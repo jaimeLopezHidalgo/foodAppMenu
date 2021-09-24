@@ -21,6 +21,7 @@
 
 <body>
     <div id="phoneContainer" class="centerChildrenHorizontally">
+        <div id="filterMessage">No se encontraron resultados</div>
         <div id="phone" class="centerChildrenHorizontally">
             <div id="display" class="fillWidth fillHeight topLimit bottomLimit">
                 <div id="appHeader" class="topLimit">
@@ -76,27 +77,27 @@
                         </table>
                     </div>
                     <div id="mainContentContainer">
-                        <div id="menuButtonsContainer">
-                            <table id="menuButtonsTable">
+                        <div id="chipsContainer">
+                            <table id="chipsTable">
                                 <tr>
-                                    <td>
-                                        <div id="timeChip" class="myButton menuButton clipChildren">
-                                            <span class="menuIconContainer"><i class="far fa-clock fa-lg"></i></span>
-                                            <div class="menuButtonDescription">11:00 am - 12:00 am
+                                    <td id="timeChipTD">
+                                        <div id="timeChip" class="myButton clipChildren chip">
+                                            <span class="menuIconContainer"><i class="far fa-clock fa-2x"></i></span>
+                                            <div class="chipDescription">11:00 am - 12:00 am
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
-                                        <div id="servicesChip" class="myButton menuButton clipChildren">
-                                            <span class="menuIconContainer"><i class="fas fa-utensils"></i></span>
-                                            <div class="menuButtonDescription">Beef
+                                    <td id="servicesChipTD">
+                                        <div id="servicesChip" class="myButton clipChildren chip">
+                                            <span class="menuIconContainer"><i class="fas fa-utensils fa-2x"></i></span>
+                                            <div class="chipDescription">Beef
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
-                                        <div id="plusOneIconButton" class="myButton menuButton clipChildren">
+                                    <td id="plusOneChipTD">
+                                        <div id="plusOneChip" class="myButton clipChildren chip">
                                             <span class="menuIconContainer"><strong id="plusOneIcon">+1</strong></span>
-                                            <div class="menuButtonDescription">Platillos
+                                            <div class="chipDescription">Platillos
                                             </div>
                                         </div>
                                     </td>
@@ -124,20 +125,22 @@
                                 <span class="modalHeaderDescription">Elige un servicio</span>
                             </div>
                             <div class="modalBody">
-                                
+
                             </div>
                         </div>
                     </div>
-                    <p id="filterMessage">No se enontraron resultados</p>
                 </div>
                 <div id="appFooter" class="fillWidth bottomLimit">
-                    <table>
+                    <table id="footerTable">
                         <tr>
                             <td><img src="../icons/shopping-cart.svg" alt="" class="footerIcon"></td>
                             <td><img src="../icons/menu.svg" alt="" id="menuIcon" class="footerIcon"></td>
                             <td><img src="../icons/user.svg" alt="" class="footerIcon"></td>
                         </tr>
                     </table>
+                </div>
+                <div id="alertCard" hidden>alerta
+                    <i class="fas fa-times"></i>
                 </div>
             </div>
         </div>
