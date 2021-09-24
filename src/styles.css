@@ -114,12 +114,15 @@ table td {
 
 #chipsContainer {
     /* border: 2px solid blue; */
-    height: 12%;
+    height: 14%;
+    padding-left: 10px;
+    padding-bottom: 15px;
+    padding-top: 2px;
 }
 
 #menuContainer {
     /* border: 2px solid blue; */
-    height: 88%;
+    height: 86%;
     text-align: center;
 }
 
@@ -160,9 +163,10 @@ table td {
 
 #modalBlur {
     position: relative;
-    top: -442px;
+    top: -485px;
     width: 100%;
-    height: 442px;
+    height: 485px;
+    padding-top: 50px;
     background-color: rgba(212, 212, 212, 0.74);
     text-align: center;
 }
@@ -198,24 +202,6 @@ table td {
     box-shadow: var(--cardBoxShadow);
 }
 
-#hourChip{
-    width: 120px;
-    margin-left: none;
-}
-
-#servicesChip{
-    min-width: 60px;
-}
-
-#servicesChip .chipDescription{
-    margin-left: 20px;
-}
-
-#plusOneChip{
-    width: 80px;
-    margin-right: none;
-}
-
 #footerTable td:hover{
     cursor: pointer;
 }
@@ -224,10 +210,40 @@ table td {
     width: 7px;
 }
   
-  
 #servicesModal::-webkit-scrollbar-thumb {
     background: linear-gradient(200deg, var(--yellowLightP) 40%, var(--yellowDarkP));
     border-radius: -10px;
+}
+
+#timeChipTD{
+    padding-right: 3px;
+    width: 147px;
+}
+
+#servicesChip{
+    width: 112px;
+}
+
+#chipsTable .chipDescription{
+    padding-left: 4px;
+    padding-right: 2px;
+}
+
+#servicesChipTD{
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+#plusOneChipTD{
+    padding-left: 5px;
+}
+
+
+#chipsTable tr{
+    /* border: 2px solid red; */
+    z-index: 1;
+    position: fixed;
+    width: 365px;
 }
 
 /* CLASSES */
@@ -361,13 +377,19 @@ table td {
     box-shadow: inset 0px 2px 2px 2px rgba(0, 0, 0, 0.247);
 }
 
-.chip {
+/* .chip {
     border-radius: 20px;
     height: 57%;
     font-size: 10px;
     position: relative; 
     float: right;
     margin: 5px;
+    text-align: center;
+} */
+
+.chip {
+    border-radius: 20px;
+    font-size: 10px;
     text-align: center;
 }
 
@@ -447,7 +469,6 @@ table td {
 .chipDescription{
     font-size: 11px;
     margin: 4px;
-
 }
 
 .fa-times{

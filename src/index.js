@@ -197,21 +197,20 @@
 
         $('.chip').on('click', function () {
             //al hacer click en chips:
-            console.log("click en chip");
+        
             var id = $(this).attr('id');
 
             if (id != "plusOneChip") {
                 toggleModal(); //desplegar pop-up
                 if (id == "timeChip") {
                     //si fue el chip de horarios:
-                    console.log("click en chip horas");
+
                     //llenar contenido del pop-up con horarios:
                     $('#servicesModal').fadeOut(0);
                     $('#hourModal').fadeIn(0);
                 } else {
                     //si fue el chip de categorías:
-                    console.log("click en chip categorias");
-                    console.log($('#modalBlur').prop("hidden"));
+                    
                     //llenar contenido del pop-up con categorías:
                     $('#hourModal').fadeOut(0);
                     $('#servicesModal').fadeIn(0);
