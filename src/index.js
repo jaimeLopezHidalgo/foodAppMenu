@@ -4,136 +4,112 @@
 
     const modalButtonElement = "<div class=\"myButton modalButton\"><\/div>";
 
-    const mealsURL = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Beef";
+    const mealsURLPrefix = "https://www.themealdb.com/api/json/v1/1/filter.php?c=";
 
     const mealsLookupPrefix = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
 
     const categoriesURL = "https://www.themealdb.com/api/json/v1/1/categories.php";
 
-    var mealsJSON;
     var alertTimeout;
 
     //FUNCTIONS
+    function getNewCard(imageURL, tag, area, name, price) {
+        var card = $(cardElement); //nueva tarjeta
 
-    function loadJSONInfo() {
-        //Hacer 3 llamadas (requests) asíncronas a los APIs
-        $.getJSON(mealsURL, function (mealsData) {
-            //primer request:
+        //llenar tarjeta
+        card.find('.imageCard').css("background-image", "url(" + imageURL + ")");
+        card.find('.mealTag').text(tag);
+        card.find('.mealArea').text(area);
+        card.find('.mealName').text(name);
+        card.find('.mealPrice').text(price);
 
-            mealsJSON = mealsData.meals; //guardar JSON con todos los platillos
-        }).then(function () {//'then' espera a que termine el request anterior
-            mealsJSON.forEach((meal, i) => {
-                $.getJSON(mealsLookupPrefix + meal.idMeal, function (mealLookup) {
-                    //segundo request: 
-
-                    //Actualizar cada platillo en JSON con los datos de categoría y área
-                    mealArea = mealLookup.meals[0].strArea;
-                    mealsJSON[i].strArea = mealArea;
-                    var mealTag = mealLookup.meals[0].strTags;
-                    mealTag = mealTag == null ? "" : mealTag.split(',')[0];
-                    mealsJSON[i].strTags = mealTag;
-                })
-            });
-        }).then(function () {
-            $.getJSON(categoriesURL, function (categoriesData) {
-                //tercer request: 
-
-                var category;
-                var modalBody = $('#servicesModal');
-                $.each(categoriesData.categories, function (i, data) {
-                    category = data.strCategory;
-                    button = $(modalButtonElement);
-                    if (category == "Beef") {
-                        button.addClass("modalButtonSelected");
-                    }
-                    button.text(category);
-                    modalBody.append(button); //guardar categorías de filtrado en cuerpo del pop-up de categoría
-                });
-            })
-        });
+        return card;
     }
 
-    function reloadMenu() {
+    async function getInitialMealData(mealJSON) {
+        //función asíncrona que extrae los datos iniciales de los platillos
+        
+        //objeto a llenar:
+        var summary = {
+            mealID:"",
+            mealPrice:"",
+            mealName:"",
+            mealImageURL:""
+        };
+
+        //llenar objeto local a partir de 'mealJSON': 
+        summary.mealID = mealJSON.idMeal;
+        summary.mealPrice = summary.mealID.substring(0, 2) + '.' + summary.mealID.substring(2, summary.mealID.length) + ',00 MXN';
+        summary.mealName = mealJSON.strMeal;
+        summary.mealImageURL = mealJSON.strMealThumb;
+
+        return summary;
+    }
+
+    function fetchCategory(category) {
         let menuContainer = $('#menuContainer');
-        var card;
-        var mealID;
-        var mealImageURL;
-        var mealName;
-        var mealPrice;
-
         menuContainer.empty(); //vaciar menú actual
-        mealsJSON.forEach((meal, i) => {
-            card = $(cardElement); //nueva tarjeta
-
-            //recolectar datos de los JSON guardados
-            mealID = meal.idMeal;
-            mealImageURL = meal.strMealThumb;
-            mealTag = meal.strTags;
-            mealTag = mealTag == null ? "" : mealTag.split(',')[0];
-            mealArea = meal.strArea;
-            mealName = meal.strMeal;
-            mealPrice = mealID.substring(0, 2) + '.' + mealID.substring(2, mealID.length) + ',00 MXN';
-
-            //llenar tarjeta
-            card.find('.imageCard').css("background-image", "url(" + mealImageURL + ")");
-            card.find('.mealTag').text(mealTag);
-            card.find('.mealArea').text(mealArea);
-            card.find('.mealName').text(mealName);
-            card.find('.mealPrice').text(mealPrice);
-
-            menuContainer.append(card); //meter tarjeta al cuerpo del menú
-        });
-
-    }
-
-    function loadHomePage(){
-        loadJSONInfo(); //guardar info de los APIs localmente
-        setTimeout(function () {
-            reloadMenu(); //esperar a qué terminen los requests y cargar menú
-        }, 1000);
-    }
-
-    function filterMenu(category) {
-        var imageCards = $("#menuContainer").find(".imageCard");
         var mealTag;
-        var remainingCards = imageCards.length;
+        var mealArea;
+        var card;
 
-        $('#filterMessage').css("visibility", "hidden"); //siempre esconder el mensaje de 0 resultados
+        //request del API por categoría:
+        $.getJSON(mealsURLPrefix + category, function (mealsData) {
 
-        if (remainingCards < mealsJSON.length) { //si el menú se encuentra filtrado
-            reloadMenu();
-            imageCards = $("#menuContainer").find(".imageCard");
-            remainingCards = imageCards.length;
-        }
+            //por cada platillo:
+            $.each(mealsData.meals, function (key, mealJSON) {
+                getInitialMealData(mealJSON) //función asíncrona para obtener datos necesarios ANTES de la siguiente parte:
+                .then(function (initialInfo) {
+                    
+                    //request del API de los detalles de dicho platillo:
+                    $.getJSON(mealsLookupPrefix + initialInfo.mealID, function (mealDetailsData) {
+                        mealTag = mealDetailsData.meals[0].strTags;
+                        mealTag = mealTag == null ? "" : mealTag.split(',')[0];
+                        mealArea = mealDetailsData.meals[0].strArea;
+                        card = getNewCard(initialInfo.mealImageURL, mealTag, mealArea, initialInfo.mealName, initialInfo.mealPrice);
+                        menuContainer.append(card); //meter tarjeta al cuerpo del menú
+                    });
+                });
+            });
+        });
+    }
 
-        imageCards.each(function () {
-            mealTag = $(this).find(".mealTag").text();
-            if (mealTag != category) {
-                $(this).closest(".card").remove(); //los platillos fuera del criterio
-                remainingCards -= 1;
-            }
+    function loadCategoriesModal() {
+        //request al API de categorías:
+        $.getJSON(categoriesURL, function (categoriesData) {
+            var modalBody = $('#servicesModal');
+            var category;
+            var button;
+
+            //para cada categoría:
+            $.each(categoriesData.categories, function (i, data) {
+                category = data.strCategory;
+                button = $(modalButtonElement);
+                if (category == "Beef") {
+                    button.addClass("modalButtonSelected");
+                }
+                button.text(category);
+                modalBody.append(button); //guardar categorías de filtrado en cuerpo del pop-up de categoría
+            });
         })
+    }
 
-        if (remainingCards == 0) {
-            //si no hubo resultados:
-            $('#filterMessage').css("visibility", "visible"); //mostrar mensaje de filtrado
-        } else {
-            $('#filterMessage').css("visibility", "hidden"); //Esconder mensaje de filtrado
-        }
-
+    function loadHomePage() {
+        loadCategoriesModal();
+        fetchCategory("Beef");
     }
 
     function toggleModal() {
         //desplegar o esconder pop-up:
         if ($('#modalBlur').prop("hidden")) {
             //desplegar pop-up:
-            
+
             $('#modalBlur').fadeIn();
             $('#modalBlur').prop("hidden", false);
             $('#mainContentContainer').css("overflow-y", "hidden"); //desactivar el scroll del menú
         } else {
             //desplegar pop-up:
-            
+
             $('#modalBlur').fadeOut();
             $('#modalBlur').prop("hidden", true);
             $('#mainContentContainer').css("overflow-y", "auto"); //activar el scroll del menú
@@ -142,7 +118,7 @@
 
     function displayAlert() {
         //mostrar alerta:
-        
+
         clearTimeout(alertTimeout);
         $('#alertCard').fadeIn();
         alertTimeout = setTimeout(function () {
@@ -173,7 +149,7 @@
 
         $('.modal').on('click', '.modalButton', function () {
             //al hacer click en un botón del pop-up
-            
+
             var text;
             if (!$(this).hasClass("modalButtonSelected")) {
                 //sombrear el botón del pop-up seleccionado:
@@ -183,13 +159,13 @@
                 text = $(this).text(); //extraer el valor del botón
                 if ($(this).closest(".modal").attr('id') == "hourModal") {
                     //si el botón pertenece al pop-up de horarios:
-                    
+
                     $('#timeChip').find(".chipDescription").text(text); //asignar valor seleccionado
                 } else {
                     //si el botón pertenece al pop-up de categorías:
-                    
+
                     $('#servicesChip').find(".chipDescription").text(text); //asignar valor seleccionado
-                    filterMenu(text); //filtrar menú por categoría
+                    fetchCategory(text); //filtrar menú por categoría
                 }
             }
             toggleModal() //esconder pop-up
@@ -197,7 +173,7 @@
 
         $('.chip').on('click', function () {
             //al hacer click en chips:
-        
+
             var id = $(this).attr('id');
 
             if (id != "plusOneChip") {
@@ -210,12 +186,20 @@
                     $('#hourModal').fadeIn(0);
                 } else {
                     //si fue el chip de categorías:
-                    
+
                     //llenar contenido del pop-up con categorías:
                     $('#hourModal').fadeOut(0);
                     $('#servicesModal').fadeIn(0);
                 }
             }
+        });
+
+        $('#modalBlur').on('click',function (){
+            toggleModal();
+        });
+
+        $('.modal').on('click',function (e){
+            e.stopPropagation();
         });
 
         $('.fa-times').on('click', function () {
